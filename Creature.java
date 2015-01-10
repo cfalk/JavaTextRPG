@@ -13,10 +13,19 @@ public abstract class Creature
     }
   }
 
+  protected int strength=10;
+  protected int constitution=10;
+  protected int dexterity=10;
+  protected int wisdom=10;
+  protected int intelligence=10;
+  protected int charisma=10;
+
+  protected int maxHp;
   protected int hp;
   protected int getHP() {
     return hp;
   }
+
 
   protected Vector<Item> inventory = new Vector<Item>();
   protected Vector<Item> getInventory() {
@@ -28,11 +37,12 @@ class Goblin extends Creature
 {
 
   Goblin() {
-    hp = Dice.d20();
+    maxHp = Dice.d20();
+    hp = maxHp;
     int inventoryRoll = Dice.d100();
 
-    if (inventoryRoll>20) inventory.add( new HealthPotion() );
-    if (inventoryRoll>40) inventory.add( new HealthPotion() );
+    //if (inventoryRoll>20) inventory.add( new HealthPotion() );
+    //if (inventoryRoll>40) inventory.add( new HealthPotion() );
     if (inventoryRoll>60) inventory.add( new Sword() );
   }
 
