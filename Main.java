@@ -14,7 +14,7 @@ public class Main
     while(true){
       pos = map.move();
 
-      if (Arrays.equals(pos, map.quitPos()) ) {
+      if (map.quit) {
         break;
 
       } else {

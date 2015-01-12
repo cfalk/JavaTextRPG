@@ -7,6 +7,7 @@ public class Input
     System.out.println(question);
     return getInput();
   }
+
   public static String getInput() {
     Scanner keyboard = new Scanner(System.in);
     String raw;
@@ -18,6 +19,5 @@ public class Input
     System.out.println();
     return raw;
   }
-
 
 }
