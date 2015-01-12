@@ -1,13 +1,18 @@
 class Player extends Creature
 {
-  protected String name;
-  protected String race;
+  private String name;
+  private String race;
 
   public Player() {
     randomizeStats();
+    name = Input.getInput("What's your name?");
+    String race = Input.getInput("What race are you? (human)");
+
+    // TODO: Expand to include more races/etc.
+    setRace(race);
   }
 
-  public void randomizeStats() {
+  private void randomizeStats() {
     strength=Dice.charStatRoll();
     constitution=Dice.charStatRoll();
     dexterity=Dice.charStatRoll();
@@ -16,7 +21,7 @@ class Player extends Creature
     charisma=Dice.charStatRoll();
   }
 
-  public void setRace(String r){
+  private void setRace(String r){
     //TODO: Add stat-modifications for different races.
     race = r;
   }
