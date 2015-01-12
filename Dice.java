@@ -2,14 +2,10 @@ import java.util.Arrays;
 
 public class Dice
 {
-  static boolean DEBUG = false;
-
   public static void main(String[] args)
   {
-    if (DEBUG)
-    {
-      System.out.println("D20 rolled... "+d(20));
-    }
+    System.out.println("D3 rolled... "+d(3));
+    System.out.println("D20 rolled... "+d(20));
   }
 
   public static int d(int num)

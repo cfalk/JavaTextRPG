@@ -68,6 +68,8 @@ public class Map
       while (battle.active) {
         battle.round();
       }
+
+      System.out.println("Battle is over!");
     }
   }
 

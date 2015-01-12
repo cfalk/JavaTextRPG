@@ -28,14 +28,64 @@ public class Battle
     return involved;
   }
 
+  private void delay(int ms) {
+    // Delay execution for a second for effect...
+    try {
+      Thread.sleep(ms);
+    } catch(InterruptedException e) { }
+  }
+
   public void round() {
+    while (true) {
+      Creature[] participants = allInvolved();
 
-    Creature[] participants = allInvolved();
+      for (Creature participant : participants) {
 
-    //TODO: Actually do battle.
+        if (participant instanceof Player) {
 
-    if (getLivingMonsters().length==0)
-       active = false;
+          printHUD();
+
+          Creature[] monsters = getLivingMonsters();
+          String question = "Which would you like to attack?";
+          int choice = Input.getIntInRange(1, monsters.length+1, question);
+
+          Creature selected = monsters[choice-1];
+          String outcome = player.attack(selected);
+
+          System.out.print("Attacking... ");
+          delay(500);
+
+          System.out.println(outcome + "!\n");
+          delay(750);
+
+        } else {
+
+          // TODO: If monster attacks...
+
+        }
+
+      }
+
+      if (getLivingMonsters().length==0 || !player.isAlive()) {
+        active = false;
+        break;
+      }
+    }
+  }
+
+
+  public void printHUD() {
+
+    // Print your health.
+    System.out.println("You: " +  player.status());
+
+    // Print the health of the monsters.
+    Creature[] monsters = getLivingMonsters();
+    for (int i=0; i < monsters.length; i++) {
+      Creature monster = monsters[i];
+      String label = "" + (i+1) + ".) ";
+      System.out.println(label + monster.name + " " +  monster.status());
+    }
 
   }
 
