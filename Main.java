@@ -3,7 +3,10 @@ import java.util.Arrays;
 
 public class Main
 {
-  public static void main(String[] args){
+
+  public static void main(String[] args)
+  {
+
     System.out.println("Welcome, adventurer!");
 
     Player player = new Player();
@@ -15,14 +18,16 @@ public class Main
       pos = map.move();
 
       if (map.quit) {
+        System.out.println("Quitting!");
         break;
 
       } else {
+
         System.out.println("Now at: "+pos[0]+", "+pos[1]);
+        Map.enter(player);
+
       }
     }
-
-    System.out.println("Quitting!");
   }
 
 

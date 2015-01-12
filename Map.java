@@ -30,6 +30,47 @@ public class Map
     }
   }
 
+  private static String key() {
+    return currentPos[0]+","+currentPos[1];
+  }
+
+  public static boolean checkForBattle() {
+    int likelihood;
+
+    switch (key()) {
+      default:
+        likelihood = 25;
+    }
+
+    return Dice.d(100)<likelihood;
+
+  }
+
+  private static Creature[] getMonsters() {
+    int numMonsters;
+
+    switch (key()) {
+      default:
+        numMonsters = Dice.d(2);
+    }
+
+    Creature[] monsters = new Creature[numMonsters];
+    for (int i=0; i<numMonsters; i++) monsters[i] = new Goblin();
+
+    return monsters;
+  }
+
+  public static void enter(Player player) {
+    if (checkForBattle()) {
+      Battle battle = new Battle(player, getMonsters());
+      battle.printEncounter();
+
+      while (battle.active) {
+        battle.round();
+      }
+    }
+  }
+
   public static boolean checkNextPosition(String dir) {
     // Returns `true` if the next position is valid -- else `false`.
 
@@ -48,9 +89,8 @@ public class Map
   public static int[] getNextPosition(String dir) {
     int[] newPos = new int[currentPos.length];
     System.arraycopy(currentPos, 0, newPos, 0, currentPos.length);
-    String key = currentPos[0]+","+currentPos[1];
 
-    switch (key) {
+    switch (key()) {
       default:
         if (dir.equals("e")) newPos[0]++;
         else if (dir.equals("w")) newPos[0]--;

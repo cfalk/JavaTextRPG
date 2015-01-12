@@ -25,7 +25,7 @@ class Sword extends Weapon
   Sword() {
     weight=4;
     bonuses.put("damage", 3);
-    durability = Dice.d10()*7+30;
+    durability = Dice.d(10)*7+30;
   }
   Sword(boolean autoequipped) {
     this();

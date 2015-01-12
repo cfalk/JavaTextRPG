@@ -1,4 +1,5 @@
 import java.util.Vector;
+import java.util.Comparator;
 
 public abstract class Creature
 {
@@ -20,6 +21,8 @@ public abstract class Creature
   protected int wisdom=10;
   protected int intelligence=10;
   protected int charisma=10;
+
+  protected int baseInitiative = 0;
 
   protected int getEquipmentBonus(String mod){
     int bonus = 0;
@@ -48,12 +51,19 @@ public abstract class Creature
     return (int) rounded;
   }
 
+  public int getInitiative() {
+    return baseInitiative + getModifier("dexterity");
+  }
+
   protected int maxHp;
   protected int hp;
-  protected int getHP() {
+  public int getHP() {
     return hp;
   }
 
+  public boolean isAlive() {
+    return hp>0;
+  }
 
   protected Vector<Item> inventory = new Vector<Item>();
   protected Vector<Item> getInventory() {
@@ -61,14 +71,24 @@ public abstract class Creature
   }
 }
 
+class InitiativeComparator implements Comparator<Creature>
+{
+
+  @Override
+  public int compare(Creature a, Creature b) {
+    return a.getInitiative() - b.getInitiative();
+  }
+
+}
+
 class Goblin extends Creature
 {
 
   Goblin() {
-    maxHp = Dice.d20();
+    maxHp = Dice.d(20);
     hp = maxHp;
 
-    int inventoryRoll = Dice.d100();
+    int inventoryRoll = Dice.d(100);
     if (inventoryRoll>60) inventory.add( new Sword(true) );
   }
 
