@@ -3,22 +3,12 @@ import java.util.Comparator;
 
 public abstract class Creature
 {
-  static boolean DEBUG = true;
-  public static void main(String[] args) {
-    if (DEBUG) {
-      Goblin gob = new Goblin();
-      Goblin gob2 = new Goblin();
-      System.out.println(gob.getHp());
-      System.out.println(gob2.getHp());
-      System.out.println(gob2.getInventory());
-    }
-  }
 
   public String name;
   protected int maxHp;
   protected int hp;
+  protected int level = 1;
 
-  protected int level=1;
   protected int strength=10;
   protected int constitution=10;
   protected int dexterity=10;

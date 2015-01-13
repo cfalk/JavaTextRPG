@@ -10,7 +10,7 @@ public class Input
   }
 
   public static int getInt(String question) {
-    System.out.println(question);
+    Main.print(question+"\n");
     return getInt();
   }
 
@@ -19,7 +19,7 @@ public class Input
     while (true) {
 
       try {
-        System.out.print(">>> ");
+        Main.print(">>> ");
         return keyboard.nextInt();
       }
 
@@ -32,7 +32,7 @@ public class Input
 
 
   public static int getIntInRange(int min, int max, String question) {
-    System.out.println(question);
+    Main.print(question+"\n");
     return getIntInRange(min, max);
   }
 
@@ -45,9 +45,20 @@ public class Input
     return result;
   }
 
+  public static void enterToContinue() {
+    Main.print("\n\t[Press enter to continue...]");
+
+    try {
+      System.in.read();
+    } catch(Exception e) {}
+
+    Main.print("\n");
+  }
+
+
 
   public static String getInput(String question){
-    System.out.println(question);
+    Main.print(question+"\n");
     return getInput();
   }
 
@@ -56,11 +67,11 @@ public class Input
     Scanner keyboard = new Scanner(System.in);
     String raw;
     while (true) {
-      System.out.print(">>> ");
+      Main.print(">>> ");
       raw = keyboard.nextLine();
       if (raw.length()>0) break;
     }
-    System.out.println();
+    Main.print("\n");
     return raw;
   }
 

@@ -23,15 +23,16 @@ class Player extends Creature
 
 
   public void printStats() {
-    System.out.println( name + " the " + race );
-    System.out.println( "HP: " + status() );
-    System.out.println( "Strength: " + getModifier("strength") );
-    System.out.println( "Constitution: " + getModifier("constitution") );
-    System.out.println( "Dexterity: " + getModifier("dexterity") );
-    System.out.println( "Wisdom: " + getModifier("wisdom") );
-    System.out.println( "Intelligence: " + getModifier("intelligence") );
-    System.out.println( "Charisma: " + getModifier("charisma") );
-    System.out.println();
+    Main.print( name + " the " + race +"\n");
+    Main.print( "HP: " + status() +"\n");
+    Main.print( "Strength: " + getModifier("strength") +"\n");
+    Main.print( "Constitution: " + getModifier("constitution") +"\n");
+    Main.print( "Dexterity: " + getModifier("dexterity") +"\n");
+    Main.print( "Wisdom: " + getModifier("wisdom") +"\n");
+    Main.print( "Intelligence: " + getModifier("intelligence") +"\n");
+    Main.print( "Charisma: " + getModifier("charisma") +"\n");
+
+    Input.enterToContinue();
   }
 
 

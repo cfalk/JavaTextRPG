@@ -21,11 +21,11 @@ public class Map
           currentPos = getNextPosition(request);
           return currentPos;
         } else {
-          System.out.println("Woops! Can't go that way...");
+          Main.print("Woops! Can't go that way...\n");
         }
 
       } else {
-        System.out.println("Not a valid direction...");
+        Main.print("Not a valid direction...\n");
       }
     }
   }
@@ -69,7 +69,16 @@ public class Map
         battle.round();
       }
 
-      System.out.println("Battle is over!");
+      if (player.isAlive()) {
+        int exp = battle.calculateExperience();
+        Main.print("Victory! You gained " + exp + " experience.\n");
+      } else {
+        Main.print("You died! Game over...\n");
+        quit = true;
+      }
+
+      Input.enterToContinue();
+
     }
   }
 

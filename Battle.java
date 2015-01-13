@@ -35,63 +35,79 @@ public class Battle
     } catch(InterruptedException e) { }
   }
 
+
+  public int calculateExperience() {
+    return monsters.length;
+  }
+
+
   public void round() {
-    while (true) {
-      Creature[] participants = allInvolved();
+    printHUD();
+    Creature[] participants = allInvolved();
 
-      for (Creature participant : participants) {
+    for (Creature participant : participants) {
+      if (!player.isAlive()) break;
 
-        if (participant instanceof Player) {
+      if (participant instanceof Player) {
 
-          printHUD();
 
-          Creature[] monsters = getLivingMonsters();
-          String question = "Which would you like to attack?";
-          int choice = Input.getIntInRange(1, monsters.length+1, question);
+        Creature[] monsters = getLivingMonsters();
+        String question = "Which would you like to attack?";
+        int choice = Input.getIntInRange(1, monsters.length+1, question);
 
-          Creature selected = monsters[choice-1];
-          String outcome = player.attack(selected);
+        Creature selected = monsters[choice-1];
+        String outcome = player.attack(selected);
 
-          System.out.print("Attacking... ");
-          delay(500);
+        Main.print("Attacking... ");
+        delay(500);
 
-          System.out.println(outcome + "!\n");
-          delay(750);
+        Main.print(outcome + "!\n");
+        delay(750);
 
-        } else {
+      } else {
 
-          // TODO: If monster attacks...
+        String outcome = participant.attack(player);
 
-        }
+        Main.print(participant.name +" attacks you... ");
+        delay(500);
+
+        Main.print(outcome + "!\n");
+        delay(750);
 
       }
 
-      if (getLivingMonsters().length==0 || !player.isAlive()) {
-        active = false;
-        break;
-      }
     }
+
+    if (getLivingMonsters().length==0 || !player.isAlive()) {
+
+      active = false;
+
+    } else {
+
+      Input.enterToContinue();
+    }
+
   }
 
 
   public void printHUD() {
 
     // Print your health.
-    System.out.println("You: " +  player.status());
+    Main.print("You: " +  player.status()+"\n");
 
     // Print the health of the monsters.
     Creature[] monsters = getLivingMonsters();
     for (int i=0; i < monsters.length; i++) {
       Creature monster = monsters[i];
       String label = "" + (i+1) + ".) ";
-      System.out.println(label + monster.name + " " +  monster.status());
+      Main.print(label + monster.name + " " +  monster.status()+"\n");
     }
 
   }
 
 
   public void printEncounter() {
-    System.out.println("Oh no, some goblins appeared!");
+    Main.print("Oh no, some goblins appeared!\n");
   }
 
 
