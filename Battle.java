@@ -42,33 +42,34 @@ public class Battle
 
 
   public void round() {
+
     printHUD();
     Creature[] participants = allInvolved();
+    Creature[] monsters = getLivingMonsters();
+
+    String question = "Which would you like to attack?";
+    int choice = Input.getIntInRange(1, monsters.length+1, question);
 
     for (Creature participant : participants) {
       if (!player.isAlive()) break;
 
       if (participant instanceof Player) {
 
-
-        Creature[] monsters = getLivingMonsters();
-        String question = "Which would you like to attack?";
-        int choice = Input.getIntInRange(1, monsters.length+1, question);
-
         Creature selected = monsters[choice-1];
         String outcome = player.attack(selected);
 
-        Main.print("Attacking... ");
+        Main.print(" -- You attack " + selected.name + "... ");
         delay(500);
 
         Main.print(outcome + "!\n");
         delay(750);
 
       } else {
+        if (!participant.isAlive()) continue;
 
         String outcome = participant.attack(player);
 
-        Main.print(participant.name +" attacks you... ");
+        Main.print(" -- "+participant.name +" attacks you... ");
         delay(500);
 
         Main.print(outcome + "!\n");
@@ -79,12 +80,7 @@ public class Battle
     }
 
     if (getLivingMonsters().length==0 || !player.isAlive()) {
-
       active = false;
-
-    } else {
-
-      Input.enterToContinue();
     }
 
   }

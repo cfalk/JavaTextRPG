@@ -66,6 +66,7 @@ public class Map
       battle.printEncounter();
 
       while (battle.active) {
+        Input.enterToContinue();
         battle.round();
       }
 
